@@ -109,21 +109,28 @@ public class Network {
     /** Computes and returns the name of the most popular user in this network: 
      *  The user who appears the most in the follow lists of all the users. */
     public String mostPopularUser() {
-      int [] arr= new int[users.length]; 
+    int [] arr= new int[users.length];
+    int count = 0; 
+    int max = 0;
+    int index =0;
       for(int i=0; i<users.length; i++){
-        String[] ListOfFollowo= users[i].getfFollows();
-        int index =0;
-        for(int j=0; j<ListOfFollowo.length; j++){
-            
+        String name = users[i].getName();
+        count = followeeCount(name);
+        if (count > max) {
+            max = count;
+            index = i;
         }
       }
-        return null;
+      String mostPopularUser = users[index].getName();
+      mostPopularUser = ChangeName(mostPopularUser);
+    return mostPopularUser;
     }
 
     /** Returns the number of times that the given name appears in the follows lists of all
      *  the users in this network. Note: A name can appear 0 or 1 times in each list. */
     private int followeeCount(String name) {
         int count = 0; 
+        name = ChangeName(name);
         for(int i=0; i<users.length; i++){
             String[] ListOfFollowo= users[i].getfFollows();
             for(int j=0; j<ListOfFollowo.length; j++){
@@ -138,9 +145,12 @@ public class Network {
 
     // Returns a textual description of all the users in this network, and who they follow.
     public String toString() {
-       //// Replace the following statement with your code
-       return null;
+        String description = "";
+        for(int i=0; i<users.length; i++){
+            description += users[i].toString() +  "\n";; 
     }
+    return description;
+}
     public String ChangeName(String name) {
         char First = name.charAt(0);
         First = Character.toUpperCase(First); 
