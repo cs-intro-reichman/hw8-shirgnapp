@@ -4,7 +4,6 @@
 
     // Maximum number of users that a user can follow
     static int maxfCount = 10;
-
     private String name;       // name of this user
     private String[] follows;  // array of user names that this user follows
     private int fCount;        // actual number of followees (must be <= maxfCount)
@@ -43,6 +42,7 @@
 
     /** If this user follows the given name, returns true; otherwise returns false. */
     public boolean follows(String name) {
+        name = ChangeName(name);
        for(int i=0; i<10; i++){
         if (this.follows[i].equals(name)){
           return true;
@@ -53,6 +53,7 @@
     /** Makes this user follow the given name. If successful, returns true. 
      *  If this user already follows the given name, or if the follows list is full, does nothing and returns false; */
     public boolean addFollowee(String name) {
+        name = ChangeName(name);
        boolean IsExist = false;
        int j =0;
        for(int i=0; i<10; i++){
@@ -77,7 +78,7 @@
     /** Removes the given name from the follows list of this user. If successful, returns true.
      *  If the name is not in the list, does nothing and returns false. */
     public boolean removeFollowee(String name) {
-        String transport = "";
+        name = ChangeName(name);
         for(int i=0; i<10; i++){
             if (this.follows[i].equals(name)){
                 this.fCount--;
@@ -120,10 +121,14 @@
     public boolean isFriendOf(User other) {
     boolean isFriend1 = false;
     boolean isFriend2 = false;
-    if (other.follows(name))
+    String name1 = other.getName();
+    name1 = ChangeName(name1);
+    String thisname = this.name;
+    thisname = ChangeName(thisname);
+    if (other.follows(thisname))
         isFriend1 = true;
     for(int i=0; i<10; i++){
-          if (this.follows[i].equals(name)){
+          if (this.follows[i].equals(name1)){
             isFriend2 = true;
             }
         }
@@ -140,4 +145,11 @@
         }
         return ans;
     }
+    public String ChangeName(String name) {
+        char First = name.charAt(0);
+        First = Character.toUpperCase(First); 
+        name = First + name.substring(1); 
+        return name;
+    }
+}
 }
