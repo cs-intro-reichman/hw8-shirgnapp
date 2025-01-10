@@ -97,18 +97,21 @@ public class Network {
     //}
     //return false;
    // }
- 
-public boolean addFollowee(String name1, String name2) {
+   public boolean addFollowee(String name1, String name2) {
     name1 = ChangeName(name1);
     name2 = ChangeName(name2);
+
+    if (name1.equals(name2)) {
+        return false; 
+    }
     User user1 = getUser(name1);
     User user2 = getUser(name2);
     if (user1 == null || user2 == null) {
         return false; 
     }
+
     return user1.addFollowee(name2);
 }
-
     //public boolean addFollowee(String name1, String name2) {
       //  name1 = ChangeName(name1);
        // name2 = ChangeName(name2);
@@ -245,14 +248,15 @@ public boolean addFollowee(String name1, String name2) {
   //  return description;
 //}
 public String toString() {
-    StringBuilder description = new StringBuilder();
+    String description = "Network:";
     for (int i = 0; i < users.length; i++) {
         if (users[i] != null) {
-            description.append(users[i].toString()).append("\n");
+            description += "\n" + users[i].toString();
         }
     }
-    return description.toString().trim();
+    return description;
 }
+
 public String ChangeName(String name) {
     if (name == null || name.isEmpty()) {
         return name; 
