@@ -64,48 +64,43 @@ import java.time.chrono.IsoEra;
     /** Makes this user follow the given name. If successful, returns true. 
      *  If this user already follows the given name, or if the follows list is full, does nothing and returns false; */
    
+     public boolean addFollowee(String name) {
+        name = ChangeName(name);
+        for (int i = 0; i < fCount; i++) {
+            if (follows[i] != null && follows[i].equals(name)) {
+                return false; 
+            }
+        }
+        if (fCount < maxfCount) {
+            follows[fCount++] = name;
+            return true; 
+        }
+        return false;
+    }
     
-   public boolean addFollowee(String name) {
-    name = ChangeName(name); 
-    int j = -1;
-    for (int i = 0; i < 10; i++) {
-        if (this.follows[i] != null && this.follows[i].equals(name)) {
-            return false; 
-        }
-        if (this.follows[i] == null && j == -1) {
-            j = i; 
-        }
-        if (i == 9 && this.follows[i] != null) {
-            return false; 
-    }
-
- 
-    if (j != -1) {
-        this.follows[j] = name;
-        this.fCount++;
-        return true; 
-        } 
-    }
-    return false; 
-}
-
+  
 
 
     /** Removes the given name from the follows list of this user. If successful, returns true.
      *  If the name is not in the list, does nothing and returns false. */
     public boolean removeFollowee(String name) {
+        if (name == null) {
+            return false; // אם השם null, אי אפשר להסיר
+        }
+    
         name = ChangeName(name);
         for (int i = 0; i < fCount; i++) {
             if (follows[i] != null && follows[i].equals(name)) {
                 for (int j = i; j < fCount - 1; j++) {
                     follows[j] = follows[j + 1];
                 }
-                follows[--fCount] = null; 
+                follows[--fCount] = null;
                 return true;
             }
         }
         return false;
     }
+    
     
    // public boolean removeFollowee(String name) {
      //   name = ChangeName(name);
