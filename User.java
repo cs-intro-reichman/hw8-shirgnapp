@@ -146,14 +146,26 @@ import java.time.chrono.IsoEra;
   //  return true;
 //}
 public boolean addFollowee(String name) {
-    if (fCount==maxfCount) return false;
-    if (follows(name)) return false;
-    if (name.charAt(0)>='a' && name.charAt(0)<='z' ) {
-        String newName = name.substring(0, 1).toUpperCase() + name.substring(1);
-        follows[fCount] = newName;
+    if (name == null || name.trim().isEmpty()) {
+        System.out.println("Invalid followee name.");
+        return false;
     }
-    else follows[fCount] = name;
+
+    name = ChangeName(name);
+
+    if (fCount >= maxfCount) {
+        System.out.println(this.name + " reached the maximum followee count.");
+        return false;
+    }
+
+    if (follows(name)) {
+        System.out.println(this.name + " is already following " + name);
+        return false;
+    }
+
+    follows[fCount] = name;
     fCount++;
+    System.out.println("Successfully added " + name + " to " + this.name);
     return true;
 }
 
