@@ -51,7 +51,7 @@ import java.time.chrono.IsoEra;
         }
         return false;
     }
-    ublic boolean addFollowee(String name) {
+    public boolean addFollowee(String name) {
         if (fCount==maxfCount) return false;
         if (follows(name)) return false;
         if (name.charAt(0)>='a' && name.charAt(0)<='z' ) {
