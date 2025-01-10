@@ -104,25 +104,43 @@ import java.time.chrono.IsoEra;
        // return true; 
       
    // }
+
    public boolean addFollowee(String name) {
-    if (name == null) {
-        System.out.println("Cannot follow a null name.");
-        return false;
+    if (name == null ) {
+        return false; 
     }
-    name = ChangeName(name);
-    if (follows(name)) {
-        System.out.println(this.name + " is already following " + name);
-        return false;
+    for (int i = 0; i < this.follows.length; i++) {
+        if (follows[i] != null && follows[i].toLowerCase().equals(name.toLowerCase())) {
+            return false; 
+        }
     }
-    if (fCount >= maxfCount) {
-        System.out.println(this.name + " reached the maximal number of follows. Can't follow " + name);
-        return false;
+    if (fCount >= follows.length) {
+        return false; 
     }
+
     follows[fCount] = name;
     fCount++;
-    System.out.println("Successfully added " + name + " to " + this.name);
     return true;
 }
+  // public boolean addFollowee(String name) {
+   // if (name == null) {
+     //   System.out.println("Cannot follow a null name.");
+       // return false;
+   // }
+    //name = ChangeName(name);
+    //if (follows(name)) {
+      //  System.out.println(this.name + " is already following " + name);
+      //  return false;
+   // }
+    //if (fCount >= maxfCount) {
+      //  System.out.println(this.name + " reached the maximal number of follows. Can't follow " + name);
+        //return false;
+   // }
+   // follows[fCount] = name;
+   // fCount++;
+   // System.out.println("Successfully added " + name + " to " + this.name);
+   // return true;
+//}
 
     
    // public boolean addFollowee(String name) {
