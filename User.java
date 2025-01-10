@@ -88,24 +88,43 @@ import java.time.chrono.IsoEra;
         //return false; 
    // }
 
-    public boolean addFollowee(String name) {
+    //public boolean addFollowee(String name) {
 
-        name = ChangeName(name);
-        for (int i = 0; i < fCount; i++) {
-            if (follows[i].equalsIgnoreCase(name)) { 
-                return false; 
-            }
-        }
+      //  name = ChangeName(name);
+        //for (int i = 0; i < fCount; i++) {
+          //  if (follows[i].equalsIgnoreCase(name)) { 
+            //    return false; 
+           // }
+       // }
 
-        if (fCount == maxfCount) { 
-            return false; 
-        }
-        follows[fCount++] = name; 
-        return true; 
+        //if (fCount == maxfCount) { 
+          //  return false; 
+       // }
+       // follows[fCount++] = name; 
+       // return true; 
       
+   // }
+    
+public boolean addFollowee(String name) {
+    // Format the name to have a proper case (capitalize first letter)
+    name = ChangeName(name);
+
+   
+    if (follows(name)) {
+        System.out.println(this.name + " is already following " + name);
+        return false;
     }
-    
-    
+   
+    else if (fCount >= maxfCount) {
+        System.out.println(this.name + " reached the maximal number of follows. Can't follow " + name);
+        return false;
+    }
+    follows[fCount] = name;
+    fCount++;
+    System.out.println("Successfully added " + name + " to " + this.name);
+    return true;
+}
+
     
    // public boolean addFollowee(String name) {
      //   name = ChangeName(name);
