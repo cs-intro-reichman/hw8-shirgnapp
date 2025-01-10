@@ -64,14 +64,13 @@ import java.time.chrono.IsoEra;
     /** Makes this user follow the given name. If successful, returns true. 
      *  If this user already follows the given name, or if the follows list is full, does nothing and returns false; */
     public boolean addFollowee(String name) {
-        if (name == null) {
+        if (name == null || name.isEmpty()) {
             return false; 
         }
-    
         name = ChangeName(name);
     
         if (this.name.equals(name)) {
-            return false;
+            return false; 
         }
     
         for (int i = 0; i < fCount; i++) {
@@ -81,12 +80,13 @@ import java.time.chrono.IsoEra;
         }
     
         if (fCount < maxfCount) {
-            follows[fCount] = name; 
-            fCount++; 
+            follows[fCount++] = name; 
+            
             return true; 
         }
     
-        return false;
+       
+        return false; 
     }
     
     
