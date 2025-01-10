@@ -146,13 +146,11 @@ import java.time.chrono.IsoEra;
   //  return true;
 //}
 public boolean addFollowee(String name) {
+    name = ChangeName(name);
     if (name == null || name.trim().isEmpty()) {
         System.out.println("Invalid followee name.");
         return false;
     }
-
-    name = ChangeName(name);
-
     if (fCount >= maxfCount) {
         System.out.println(this.name + " reached the maximum followee count.");
         return false;
