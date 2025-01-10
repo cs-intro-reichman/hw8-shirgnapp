@@ -104,18 +104,17 @@ import java.time.chrono.IsoEra;
        // return true; 
       
    // }
-    
-public boolean addFollowee(String name) {
-    // Format the name to have a proper case (capitalize first letter)
+   public boolean addFollowee(String name) {
+    if (name == null) {
+        System.out.println("Cannot follow a null name.");
+        return false;
+    }
     name = ChangeName(name);
-
-   
     if (follows(name)) {
         System.out.println(this.name + " is already following " + name);
         return false;
     }
-   
-    else if (fCount >= maxfCount) {
+    if (fCount >= maxfCount) {
         System.out.println(this.name + " reached the maximal number of follows. Can't follow " + name);
         return false;
     }
@@ -151,7 +150,7 @@ public boolean addFollowee(String name) {
      *  If the name is not in the list, does nothing and returns false. */
     public boolean removeFollowee(String name) {
         if (name == null) {
-            return false; // אם השם null, אי אפשר להסיר
+            return false; 
         }
     
         name = ChangeName(name);
@@ -266,10 +265,17 @@ public boolean addFollowee(String name) {
         return ans;
     }
     public String ChangeName(String name) {
-        char First = name.charAt(0);
-        First = Character.toUpperCase(First); 
-        name = First + name.substring(1); 
-        return name;
+        if (name == null || name.isEmpty()) {
+            return name; 
+        }
+        return name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
     }
+    
+    //public String ChangeName(String name) {
+      //  char First = name.charAt(0);
+        //First = Character.toUpperCase(First); 
+        //name = First + name.substring(1); 
+        //return name;
+   // }
 }
 
