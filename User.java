@@ -1,3 +1,5 @@
+import java.time.chrono.IsoEra;
+
 /** Represents a user in a social network. A user is characterized by a name,
  *  a list of user names that s/he follows, and the list's size. */
  public class User {
@@ -39,104 +41,161 @@
     public int getfCount() {
         return fCount;
     }
-
-    /** If this user follows the given name, returns true; otherwise returns false. */
     public boolean follows(String name) {
         name = ChangeName(name);
-       for(int i=0; i<10; i++){
-        if (this.follows[i].equals(name)){
-          return true;
+        for (int i = 0; i < fCount; i++) { // עובר רק עד מספר העוקבים
+            if (follows[i] != null && follows[i].equals(name)) {
+                return true;
+            }
         }
-       }
         return false;
     }
+    
+    /** If this user follows the given name, returns true; otherwise returns false. */
+    //public boolean follows(String name) {
+      //  name = ChangeName(name);
+      // for(int i=0; i<10; i++){
+       // if (this.follows[i].equals(name)){
+        //  return true;
+       // }
+      // }
+        //return false;
+   // }
     /** Makes this user follow the given name. If successful, returns true. 
      *  If this user already follows the given name, or if the follows list is full, does nothing and returns false; */
-    public boolean addFollowee(String name) {
-        name = ChangeName(name);
-       boolean IsExist = false;
-       int j =0;
-       for(int i=0; i<10; i++){
-            if (this.follows[i].equals(name)){
-            return false;
-            }
-            if (this.follows[i] == null) {
-                j=i;
-            }
-            if (i == 9 && this.follows[i] != null) {
-                return false;
-            }
+   
+    
+   public boolean addFollowee(String name) {
+    name = ChangeName(name); 
+    int j = -1;
+    for (int i = 0; i < 10; i++) {
+        if (this.follows[i] != null && this.follows[i].equals(name)) {
+            return false; 
         }
-    if (IsExist == false) {
-        this.follows[j] += name;
-        this.fCount++; 
-        return true;
+        if (this.follows[i] == null && j == -1) {
+            j = i; 
+        }
+        if (i == 9 && this.follows[i] != null) {
+            return false; 
     }
-   return false;
+
+ 
+    if (j != -1) {
+        this.follows[j] = name;
+        this.fCount++;
+        return true; 
+        } 
+    }
+    return false; 
 }
+
+
 
     /** Removes the given name from the follows list of this user. If successful, returns true.
      *  If the name is not in the list, does nothing and returns false. */
     public boolean removeFollowee(String name) {
         name = ChangeName(name);
-        for(int i=0; i<10; i++){
-            if (this.follows[i].equals(name)){
-                this.fCount--;
-               if (i == 9) {
-                this.follows[i] = null; 
-                return true;
-               }
-               else{
-               while (this.follows[i] != null && i < 9) {
-                this.follows[i] = this.follows[i+1]; 
-                this.follows[i] = null;
-                i++;
-                if (i == 9) {
-                    this.follows[i] = null; 
-                    return true;
+        for (int i = 0; i < fCount; i++) {
+            if (follows[i] != null && follows[i].equals(name)) {
+                for (int j = i; j < fCount - 1; j++) {
+                    follows[j] = follows[j + 1];
                 }
-               }
-               }
+                follows[--fCount] = null; 
+                return true;
             }
         }
         return false;
     }
+    
+   // public boolean removeFollowee(String name) {
+     //   name = ChangeName(name);
+       // for(int i=0; i<10; i++){
+         //   if (this.follows[i].equals(name)){
+           //     this.fCount--;
+             //  if (i == 9) {
+               // this.follows[i] = null; 
+                //return true;
+               //}
+               //else{
+               //while (this.follows[i] != null && i < 9) {
+               // this.follows[i] = this.follows[i+1]; 
+               // this.follows[i] = null;
+               // i++;
+               // if (i == 9) {
+                 //   this.follows[i] = null; 
+                   // return true;
+                //}
+              // }
+              // }
+           // }
+       // }
+        //return false;
+   // }
 
     /** Counts the number of users that both this user and the other user follow.
     /*  Notice: This is the size of the intersection of the two follows lists. */
+    //public int countMutual(User other) {
+        //int count = 0;
+        //for(int i=0; i<10; i++) {
+            //for(int j=0; j<10; j++){
+             //   if (this.follows[i].equals(other.follows[j]) && this.follows[i] != null) {
+           //      count ++;   
+         //       }
+       //     }
+     //   }
+   //     return count;
+ //   }
+
     public int countMutual(User other) {
         int count = 0;
-        for(int i=0; i<10; i++) {
-            for(int j=0; j<10; j++){
-                if (this.follows[i].equals(other.follows[j]) && this.follows[i] != null) {
-                 count ++;   
+        for (int i = 0; i < fCount; i++) {
+            for (int j = 0; j < other.fCount; j++) {
+                if (follows[i] != null && follows[i].equals(other.follows[j])) {
+                    count++;
                 }
             }
         }
         return count;
     }
-
+    
     /** Checks is this user is a friend of the other user.
      *  (if two users follow each other, they are said to be "friends.") */
+   // public boolean isFriendOf(User other) {
+    //boolean isFriend1 = false;
+    //boolean isFriend2 = false;
+    //String name1 = other.getName();
+    //name1 = ChangeName(name1);
+    //String thisname = this.name;
+    //thisname = ChangeName(thisname);
+    //if (other.follows(thisname))
+      //  isFriend1 = true;
+    //for(int i=0; i<10; i++){
+      //    if (this.follows[i].equals(name1)){
+        //    isFriend2 = true;
+          //  }
+       // }
+    //if (isFriend1 && isFriend2) {
+      //return true;
+    //}
+      //  return false;
+   // }
+    /** Checks if this user is a friend of the other user.
+ *  (if two users follow each other, they are said to be "friends.") */
     public boolean isFriendOf(User other) {
-    boolean isFriend1 = false;
-    boolean isFriend2 = false;
-    String name1 = other.getName();
-    name1 = ChangeName(name1);
-    String thisname = this.name;
-    thisname = ChangeName(thisname);
-    if (other.follows(thisname))
-        isFriend1 = true;
-    for(int i=0; i<10; i++){
-          if (this.follows[i].equals(name1)){
-            isFriend2 = true;
-            }
+   
+    if (!other.follows(this.name)) {
+        return false; 
+    }
+
+    for (int i = 0; i < fCount; i++) {
+        if (this.follows[i] != null && this.follows[i].equals(other.getName())) {
+            return true; 
         }
-    if (isFriend1 && isFriend2) {
-      return true;
     }
-        return false;
-    }
+    return false; 
+}
+
+
     /** Returns this user's name, and the names that s/he follows. */
     public String toString() {
         String ans = name + " -> ";
@@ -152,4 +211,4 @@
         return name;
     }
 }
-}
+
