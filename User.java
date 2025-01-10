@@ -41,6 +41,7 @@ import java.time.chrono.IsoEra;
     public int getfCount() {
         return fCount;
     }
+
     public boolean follows(String name) {
         name = ChangeName(name);
         for (int i = 0; i < fCount; i++) { // עובר רק עד מספר העוקבים
@@ -105,63 +106,50 @@ import java.time.chrono.IsoEra;
       
    // }
 
-   public boolean addFollowee(String name) {
-    if (name == null ) {
-        return false; 
+   //public boolean addFollowee(String name) {
+   // if (name == null ) {
+     //   return false; 
+    //}
+  //  for (int i = 0; i < this.follows.length; i++) {
+      //  if (follows[i] != null && follows[i].toLowerCase().equals(name.toLowerCase())) {
+        //    return false; 
+       // }
+   // }
+    //if (fCount >= follows.length) {
+      //  return false; 
+   // }
+
+   // follows[fCount] = name;
+   // fCount++;
+   // return true;
+//}
+public boolean addFollowee(String name) {
+
+    if (name == null || name.trim().isEmpty()) {
+        System.out.println("Cannot follow a null or empty name.");
+        return false;
     }
-    for (int i = 0; i < this.follows.length; i++) {
-        if (follows[i] != null && follows[i].toLowerCase().equals(name.toLowerCase())) {
-            return false; 
-        }
+
+   
+    name = ChangeName(name);
+
+    
+    if (follows(name)) {
+        System.out.println(this.name + " is already following " + name);
+        return false;
     }
-    if (fCount >= follows.length) {
-        return false; 
+
+    if (fCount >= maxfCount) {
+        System.out.println(this.name + " reached the maximal number of follows. Can't follow " + name);
+        return false;
     }
 
     follows[fCount] = name;
     fCount++;
+    System.out.println("Successfully added " + name + " to " + this.name);
     return true;
 }
-  // public boolean addFollowee(String name) {
-   // if (name == null) {
-     //   System.out.println("Cannot follow a null name.");
-       // return false;
-   // }
-    //name = ChangeName(name);
-    //if (follows(name)) {
-      //  System.out.println(this.name + " is already following " + name);
-      //  return false;
-   // }
-    //if (fCount >= maxfCount) {
-      //  System.out.println(this.name + " reached the maximal number of follows. Can't follow " + name);
-        //return false;
-   // }
-   // follows[fCount] = name;
-   // fCount++;
-   // System.out.println("Successfully added " + name + " to " + this.name);
-   // return true;
-//}
 
-    
-   // public boolean addFollowee(String name) {
-     //   name = ChangeName(name);
-       // if (this.name.equals(name)) {
-         //   return false; 
-        //}
-        //for (int i = 0; i < fCount; i++) {
-          //  if (follows[i] != null && follows[i].equals(name)) {
-            //    return false;
-            //}
-       // }
-
-        //if (fCount < maxfCount) {
-          //  follows[fCount++] = name;
-            //return true; 
-       // }
-    
-  //      return false; 
-   // }
-    
 
 
     /** Removes the given name from the follows list of this user. If successful, returns true.
