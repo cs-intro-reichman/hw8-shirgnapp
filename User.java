@@ -63,29 +63,46 @@ import java.time.chrono.IsoEra;
    // }
     /** Makes this user follow the given name. If successful, returns true. 
      *  If this user already follows the given name, or if the follows list is full, does nothing and returns false; */
+    //public boolean addFollowee(String name) {
+      //  if (name == null) {
+        //    return false; 
+        //}
+    
+        //name = ChangeName(name);
+    
+   //     if (this.name.equals(name)) { 
+     //       return false; 
+      //  }
+    
+        //for (int i = 0; i < fCount; i++) {
+          //  if (follows[i] != null && follows[i].equals(name)) { 
+            //    return false; 
+            //}
+       // }
+    
+       // if (fCount < maxfCount) { 
+         //   follows[fCount++] = name; 
+           // return true; 
+       // }
+    
+        //return false; 
+   // }
+
     public boolean addFollowee(String name) {
-        if (name == null) {
-            return false; 
-        }
-    
+
         name = ChangeName(name);
-    
-        if (this.name.equals(name)) { 
-            return false; 
-        }
-    
         for (int i = 0; i < fCount; i++) {
-            if (follows[i] != null && follows[i].equals(name)) { 
+            if (follows[i].equalsIgnoreCase(name)) { 
                 return false; 
             }
         }
-    
-        if (fCount < maxfCount) { 
-            follows[fCount++] = name; 
-            return true; 
+
+        if (fCount == maxfCount) { 
+            return false; 
         }
-    
-        return false; 
+        follows[fCount++] = name; 
+        return true; 
+      
     }
     
     
