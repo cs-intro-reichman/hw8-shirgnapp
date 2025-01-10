@@ -123,33 +123,39 @@ import java.time.chrono.IsoEra;
    // fCount++;
    // return true;
 //}
+//public boolean addFollowee(String name) {
+
+    //if (name == null || name.trim().isEmpty()) {
+        //System.out.println("Cannot follow a null or empty name.");
+      //  return false;
+    //}
+    //name = ChangeName(name);
+    //if (follows(name)) {
+       // System.out.println(this.name + " is already following " + name);
+      //  return false;
+    //}
+
+    //if (fCount >= maxfCount) {
+     //   System.out.println(this.name + " reached the maximal number of follows. Can't follow " + name);
+      //  return false;
+   // }
+
+   // follows[fCount] = name;
+   // fCount++;
+   // System.out.println("Successfully added " + name + " to " + this.name);
+  //  return true;
+//}
 public boolean addFollowee(String name) {
-
-    if (name == null || name.trim().isEmpty()) {
-        System.out.println("Cannot follow a null or empty name.");
-        return false;
+    if (fCount==maxfCount) return false;
+    if (follows(name)) return false;
+    if (name.charAt(0)>='a' && name.charAt(0)<='z' ) {
+        String newName = name.substring(0, 1).toUpperCase() + name.substring(1);
+        follows[fCount] = newName;
     }
-
-   
-    name = ChangeName(name);
-
-    
-    if (follows(name)) {
-        System.out.println(this.name + " is already following " + name);
-        return false;
-    }
-
-    if (fCount >= maxfCount) {
-        System.out.println(this.name + " reached the maximal number of follows. Can't follow " + name);
-        return false;
-    }
-
-    follows[fCount] = name;
+    else follows[fCount] = name;
     fCount++;
-    System.out.println("Successfully added " + name + " to " + this.name);
     return true;
 }
-
 
 
     /** Removes the given name from the follows list of this user. If successful, returns true.
