@@ -44,7 +44,7 @@ import java.time.chrono.IsoEra;
 
     
     public boolean follows(String name) {
-        name = name.substring(0, 1).toUpperCase() + name.substring(1);
+        name = ChangeName(name);
         for (int i = 0; i < fCount; i++) {
             if (follows[i] != null && follows[i].equals(name)) {
                 return true;
