@@ -42,15 +42,17 @@ import java.time.chrono.IsoEra;
         return fCount;
     }
 
+    
     public boolean follows(String name) {
-        name = ChangeName(name);
-        for (int i = 0; i < fCount; i++) { 
+        name = name.substring(0, 1).toUpperCase() + name.substring(1);
+        for (int i = 0; i < fCount; i++) {
             if (follows[i] != null && follows[i].equals(name)) {
                 return true;
             }
         }
         return false;
     }
+    
     public boolean addFollowee(String name) {
         if (fCount==maxfCount) {
             return false;
