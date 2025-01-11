@@ -44,7 +44,7 @@ import java.time.chrono.IsoEra;
 
     public boolean follows(String name) {
         name = ChangeName(name);
-        for (int i = 0; i < fCount; i++) { // עובר רק עד מספר העוקבים
+        for (int i = 0; i < fCount; i++) { 
             if (follows[i] != null && follows[i].equals(name)) {
                 return true;
             }
@@ -52,7 +52,9 @@ import java.time.chrono.IsoEra;
         return false;
     }
     public boolean addFollowee(String name) {
-        if (fCount==maxfCount) return false;
+        if (fCount==maxfCount) {
+            return false;
+        }
         if (follows(name)) return false;
         if (name.charAt(0)>='a' && name.charAt(0)<='z' ) {
             String newName = name.substring(0, 1).toUpperCase() + name.substring(1);
